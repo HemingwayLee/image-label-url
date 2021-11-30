@@ -12,12 +12,16 @@
     <input id="imgurl" type="text" />
     <button onclick="handleUrlImg();">Get Image</button>
   </div>
-  <div>
+  <!-- For testing only -->
+  <!-- <div>
     <input id="inputdata" type="file" id="upload-png"/>
-  </div>
+  </div> -->
   <div>
     <input type="color" id="item" name="item" value="#FF0000">
     <label for="item">Item</label>
+  </div>
+  <div>
+    <label id="result"></label>
   </div>
   <script>
     function handleMouseDown(e) {
@@ -52,7 +56,6 @@
       mouseX = parseInt(e.clientX - offsetX);
       mouseY = parseInt(e.clientY - offsetY);
 
-      // ctx.clearRect(0, 0, cvs.width, cvs.height);
       if (imgBackground) {
         drawBackground(imgBackground);
       }
@@ -60,9 +63,12 @@
       var width = mouseX - startX;
       var height = mouseY - startY;
 
-      ctx.strokeStyle = $("#item").val();
+      const rectColor = $("#item").val();
+      ctx.strokeStyle = rectColor;
       ctx.lineWidth = 2;
       ctx.strokeRect(startX, startY, width, height);
+
+      $("#result").text(`https://rayshinlife.github.io/loader.html?sx=${startX}&sy=${startY}&mx=${mouseX}&my=${mouseY}&color=${rectColor}&url=${encodeURIComponent(imgurl)}`);
     }
 
     function drawBackground(img) {
@@ -90,14 +96,14 @@
     }
 
     function handleUrlImg() {  
-      var url = $("#imgurl").val();
+      imgurl = $("#imgurl").val();
       var img = new Image();
 
       img.onload = function() {
         imgBackground = img;
         drawBackground(img);
       }
-      img.src = url;
+      img.src = imgurl;
     }
 
     var cvs = $('#imgdata').get(0);
@@ -110,9 +116,12 @@
     var scrollY = $("#imgdata").scrollTop();
 
     var isDown = false;
+    var imgurl = "";
     var imgBackground = null;
     var startX = 0;
     var startY = 0;
+    var mouseX = 0;
+    var mouseY = 0;
 
     document.getElementById('inputdata').addEventListener('change', handleUploadedImg);
     
