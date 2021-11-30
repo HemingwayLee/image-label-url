@@ -68,7 +68,7 @@
       ctx.lineWidth = 2;
       ctx.strokeRect(startX, startY, width, height);
 
-      $("#result").text(`https://rayshinlife.github.io/show.html?sx=${startX}&sy=${startY}&mx=${mouseX}&my=${mouseY}&color=${rectColor}&url=${encodeURIComponent(imgurl)}`);
+      $("#result").text(`https://rayshinlife.github.io/show.html?sx=${startX}&sy=${startY}&mx=${mouseX}&my=${mouseY}&color=${encodeURIComponent(rectColor)}&address=${encodeURIComponent(imgurl)}`);
     }
 
     function drawBackground(img) {
@@ -123,7 +123,7 @@
     var mouseX = 0;
     var mouseY = 0;
 
-    document.getElementById('inputdata').addEventListener('change', handleUploadedImg);
+    // document.getElementById('inputdata').addEventListener('change', handleUploadedImg);
     
     $("#imgdata").mousedown(function (e) {
       handleMouseDown(e);
